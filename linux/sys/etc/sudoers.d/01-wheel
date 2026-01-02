@@ -1,0 +1,6 @@
+Cmnd_Alias REBOOT=/usr/bin/systemctl poweroff,/usr/bin/systemctl suspend,/usr/bin/systemctl hibernate,/usr/bin/systemctl hybrid-sleep,/usr/bin/systemctl reboot
+Cmnd_Alias SYNC=/usr/bin/sync
+Defaults:%wheel timestamp_timeout=5
+
+%wheel ALL=(ALL) PASSWD: ALL, NOPASSWD: REBOOT,SYNC
+#%wheel ALL=(ALL) PASSWD: ALL

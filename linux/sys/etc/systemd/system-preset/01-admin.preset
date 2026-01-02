@@ -1,0 +1,10 @@
+enable fstrim.timer
+enable getty@.service
+enable iwd.service
+enable nftables.service
+enable seatd.service
+enable systemd-networkd.service
+enable systemd-resolved.service
+enable systemd-timesyncd.service
+enable tlp.service
+disable *

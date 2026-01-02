@@ -1,0 +1,7 @@
+# mkinitcpio preset file for the 'linux' package
+
+PRESETS=('default')
+
+#default_image='/boot/initcpio.img'
+default_kver='/boot/vmlinuz-linux'
+default_uki='/efi/EFI/Linux/archlinux.efi'

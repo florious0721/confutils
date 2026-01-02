@@ -1,0 +1,2 @@
+SigLevel = Optional TrustAll
+Server = file:///dat/aur/pkg
