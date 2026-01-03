@@ -24,3 +24,8 @@ def unlock_root(root: Path):
 def service_preset(root: Path | None = None):
     if root: check_call(['arch-chroot', root, 'systemctl', 'preset-all'])
     else: check_call(['systemctl', 'preset-all'])
+
+def genlocale():
+    check_call(['locale-gen'])
+def synctime():
+    check_call(['hwclock', '--systohc'])

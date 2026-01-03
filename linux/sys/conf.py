@@ -1,5 +1,6 @@
 from pathlib import Path
 from utils.fstab import FstabEntry as Fse
+from utils.user import User, Group
 
 efi = Path('/efi')
 confsrc = Path('./etc/')
@@ -14,8 +15,17 @@ fstablist = [
     Fse(efidev, Path('/efi'), 'defaults', False, 2),
     Fse(swapdev, None, 'nofail', False, 0),
     Fse(rootdev, Path('/'), 'rw,subvol=/@arch,' + ssdopts, False, 1),
-    Fse(rootdev, Path('/dat'), 'rw,subvol=/@data,nofail' + ssdopts, False, 2),
-    Fse(rootdev, Path('/home'), 'rw,subvol=/@home,nofail' + ssdopts, False, 2),
+    Fse(rootdev, Path('/dat'), 'rw,subvol=/@data,nofail,' + ssdopts, False, 2),
+    Fse(rootdev, Path('/home'), 'rw,subvol=/@home,nofail,' + ssdopts, False, 2),
+]
+
+users = [
+    User(2739, 'aaaa', None, None, ['wheel', 'seat'], '/usr/bin/bash'),
+    #User(None, 'makepkg', None, 'nobody', ['nobody'], '/usr/bin/nologin'),
+]
+
+groups = [
+    Group(100, 'users')
 ]
 
 pkgsA = [
@@ -51,7 +61,6 @@ pkgsA = [
 
     'mesa', 'mesa-utils',
     'vulkan-mesa-layers', 'vulkan-tools',
-    'sdl2',
 
     # ThinkBook14 2025
     'acpi_call-lts', 'brightnessctl',
@@ -80,14 +89,14 @@ pkgsB = [
 
     'gnupg', 'oath-toolkit', 'pass',
 
-    'aria2', 'curl', 'openssh', 'socat', 'mihomo',
+    'aria2', 'curl', 'openssh', 'socat',
 
     'alsa-utils', 'lsp-plugins-lv2', 'element',
     'pipewire', 'pipewire-alsa',
     'pipewire-jack', 'pipewire-pulse',
     'pulsemixer',
     'ffmpeg', 'fdkaac', 'mkvtoolnix-cli',
-    'opus-tools', 'vorbis-tools', 'opustags',
+    'opus-tools', 'vorbis-tools',
 
     'fastfetch', 'fzf',
     'hyperfine', 'moreutils',
@@ -97,7 +106,6 @@ pkgsB = [
     'wayland-utils', 'wl-clipboard',
     'dbus-broker-units', 'qt5-wayland',
     'qt6-wayland', 'xorg-xwayland',
-    'opentabletdriver',
 
     'noto-fonts', 'noto-fonts-cjk', 'noto-fonts-emoji',
     'ttf-inconsolata',
@@ -122,7 +130,14 @@ pkgsB = [
     'hicolor-icon-theme', 'kvantum', 'kvantum-qt5',
 
     'android-file-transfer', 'android-tools',
+]
+pkgsaur = [
+    'sdl2',
+    'mihomo-bin', #'opustags',
 
-    'aegisub-ttools-meson-git', 'anki-bin',
-    'zen-browser-bin', 'waybar-strip',
+    'opentabletdriver',
+
+    #'aegisub-ttools-meson-git',
+    'anki-bin',
+    'zen-browser-bin', #'waybar-strip',
 ]
